@@ -1,0 +1,12 @@
+graph TD
+    Template("''html/template''")-->T_ParseFiles(".ParseFiles(fileA, fileB, .. str) o, err")
+    T_ParseFiles-->T_Obj["*template.Template"]
+    T_Obj==>T_Execute(".Execute(writer, variable struct or nil)")
+
+    NetHttp("net/http")-->NH_HandleFunc(".HandleFunc(path str, func)")
+    NetHttp-->NH_ListenAndServe(".ListenAndServe('':5000'', nil) err")
+    NetHttp-->NH_Request["*http.Request"]
+    NH_Request==>NHR_Method(".Method == http.MethodGet")
+    NH_Request==>NHR_ParseForm(".ParseForm()")
+    NH_Request==>NHR_Form(".Form[''field-name''][0]")
+  
