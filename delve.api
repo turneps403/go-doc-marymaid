@@ -1,0 +1,6 @@
+go install github.com/go-delve/delve/cmd/dlv@latest
+dlv version
+dlv debug main.go
+break bp1 main.main:3
+condition bp1 i == 2
+continue
