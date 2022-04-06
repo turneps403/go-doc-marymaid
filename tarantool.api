@@ -2,7 +2,7 @@ graph TD
     Box("box")
     -->Schema(".schema")
     -->Space(".space")
-    -->CreateSpace(".create(''space_name'')")
+    -->CreateSpace(".create(''space_name'',{if_not_exists=true,engine=''vinyl''})")
     -->SpaceObj["=> $space object"]
 
     SpaceObj
@@ -10,9 +10,9 @@ graph TD
     -->IndexObj(".$index_name")
     -->Select(":select{$field_val,...}")
 
-    SpaceObj-->SpaceFormat(":format({<br/>{name=''...'', type=''unsigned|string''},<br/>...<br/>})")
+    SpaceObj-->SpaceFormat(":format({<br/>{name=''...'', type=''unsigned|string|array''},<br/>...<br/>})")
 
-    SpaceObj-->SpaceCreateIndex(":create_index(''index_name'', {<br/>type=''hash'',<br/>parts={''field1'',...}<br/>})")
+    SpaceObj-->SpaceCreateIndex(":create_index(''index_name'', {<br/>if_not_exists=true,<br/>unique = true,<br/>type=''hash'',<br/>parts={''field1'',...}<br/>})")
 
     SpaceObj-->SpaceInsert(":insert{$field1_val, ...}")
 
@@ -20,8 +20,8 @@ graph TD
 
     IndexObj-->IndexDrop(":drop()")
 
-    Box-->BoxAttr(".cfg{listen=3301}")
+    Box-->BoxAttr(".cfg{listen=3301,pid_file=nil,<br>background=false,log_level=5}")
 
     Schema-->User(".user")-->Grant(".grant('user', 'read,write,execute', 'universe')")
-    click Grant href "https://www.tarantool.io/en/doc/latest/reference/reference_lua/box_schema/user_grant/" "Raise issue"
-
+    click Grant href "https://www.tarantool.io/en/doc/latest/reference/reference_lua/box_schema/user_grant/"
+    click SpaceFormat href "https://www.tarantool.io/en/doc/latest/reference/reference_lua/box_space/format/"
