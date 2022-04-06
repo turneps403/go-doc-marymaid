@@ -1,6 +1,19 @@
 go install github.com/go-delve/delve/cmd/dlv@latest
 dlv version
 dlv debug main.go
+
 break bp1 main.main:3
 condition bp1 i == 2
-continue
+
+continue // run forward
+next // go to next expression
+step // into
+stepout
+restart
+exit
+
+print i
+print i > 0
+set i = 12
+locals
+whatis i // type of

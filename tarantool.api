@@ -1,0 +1,27 @@
+graph TD
+    Box("box")
+    -->Schema(".schema")
+    -->Space(".space")
+    -->CreateSpace(".create(''space_name'')")
+    -->SpaceObj["=> $space object"]
+
+    SpaceObj
+    -->Index(".index")
+    -->IndexObj(".$index_name")
+    -->Select(":select{$field_val,...}")
+
+    SpaceObj-->SpaceFormat(":format({<br/>{name=''...'', type=''unsigned|string''},<br/>...<br/>})")
+
+    SpaceObj-->SpaceCreateIndex(":create_index(''index_name'', {<br/>type=''hash'',<br/>parts={''field1'',...}<br/>})")
+
+    SpaceObj-->SpaceInsert(":insert{$field1_val, ...}")
+
+    SpaceObj-->|trough<br/>def index|Select
+
+    IndexObj-->IndexDrop(":drop()")
+
+    Box-->BoxAttr(".cfg{listen=3301}")
+
+    Schema-->User(".user")-->Grant(".grant('user', 'read,write,execute', 'universe')")
+    click Grant href "https://www.tarantool.io/en/doc/latest/reference/reference_lua/box_schema/user_grant/" "Raise issue"
+
