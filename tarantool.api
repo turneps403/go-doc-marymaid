@@ -5,6 +5,9 @@ graph TD
     -->CreateSpace(".create(''space_name'',{if_not_exists=true,engine=''vinyl''})")
     -->SpaceObj["=> $space object"]
 
+    Box-->AltSpace(".space.$name")
+    -->SpaceObj
+
     SpaceObj
     -->Index(".index")
     -->IndexObj(".$index_name")
